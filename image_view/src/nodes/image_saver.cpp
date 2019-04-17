@@ -162,6 +162,12 @@ private:
       try { 
         filename = (g_format % count_ % "jpg").str();
       } catch (...) { g_format.clear(); }
+      try {
+        filename = (g_format % image_msg->header.stamp.toNSec()).str();
+      } catch (...) { g_format.clear(); }
+        try {
+        filename = (g_format % image_msg->header.stamp.toNSec() % "jpg").str();
+      } catch (...) { g_format.clear(); }
 
       if ( save_all_image || save_image_service ) {
         cv::imwrite(filename, image);
